@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Pre-flight environment check for Gemini Video Gen plugin.
+# Pre-flight environment check for Gemini Image Gen plugin.
 # Validates API key configuration and dependencies.
 #
 # Usage:
@@ -156,7 +156,7 @@ check_main_script() {
 main() {
   local checks_passed=true
 
-  echo "=== Gemini Video Gen Environment Check ==="
+  echo "=== Gemini Image Gen Environment Check ==="
   echo "Plugin directory: ${PLUGIN_DIR}"
   echo ""
 

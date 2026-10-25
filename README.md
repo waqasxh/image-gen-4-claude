@@ -1,4 +1,4 @@
-# Gemini Video Gen Plugin for Claude Code
+# Gemini Image Gen Plugin for Claude Code
 
 A Claude Code plugin for generating images using Google's Gemini API.
 

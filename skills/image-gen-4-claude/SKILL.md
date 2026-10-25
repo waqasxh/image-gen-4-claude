@@ -8,7 +8,7 @@ description: >
 allowed-tools: Bash, Read, Glob, AskUserQuestion
 ---
 
-# Gemini Video Gen Skill
+# Gemini Image Gen Skill
 
 Generate images from text prompts using Google's Gemini API.
 
