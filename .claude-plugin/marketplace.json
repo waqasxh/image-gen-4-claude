@@ -1,11 +1,11 @@
 {
-  "name": "google-image-gen",
+  "name": "image-gen-4-claude",
   "owner": {
     "name": "waqasxh"
   },
   "plugins": [
     {
-      "name": "google-image-gen",
+      "name": "image-gen-4-claude",
       "source": "./",
       "description": "Generate and edit images using Google's Gemini API"
     }

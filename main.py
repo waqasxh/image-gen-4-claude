@@ -4,11 +4,11 @@
 Generate images from text prompts or edit existing images using Google's Gemini API.
 Supports reference images and style templates for consistency.
 
-This script is part of the google-image-gen Claude Code plugin.
+This script is part of the image-gen-4-claude Claude Code plugin.
 
 Setup:
     1. Get API key from https://aistudio.google.com/apikey
-    2. Create ~/.config/google-image-gen/.env with: GOOGLE_AI_API_KEY=your_key_here
+    2. Create ~/.config/image-gen-4-claude/.env with: GOOGLE_AI_API_KEY=your_key_here
        Or export GOOGLE_AI_API_KEY=your_key_here
     3. Run: uv sync (or pip install google-genai python-dotenv pillow)
 
@@ -228,7 +228,7 @@ def _resolve_path(path: Path, base_dir: Path) -> Path:
 def _load_env(script_dir: Path, base_dir: Path) -> None:
     """Load .env files; earlier sources win over later ones."""
     # 1. User home config (primary recommended location)
-    home_env = Path.home() / ".config" / "google-image-gen" / ".env"
+    home_env = Path.home() / ".config" / "image-gen-4-claude" / ".env"
     if home_env.exists():
         load_dotenv(home_env)
 
@@ -299,7 +299,7 @@ def main() -> int:
     if not os.environ.get("GOOGLE_AI_API_KEY"):
         print("Error: GOOGLE_AI_API_KEY not found in environment")
         print("Set up your API key using one of these methods:")
-        print("  1. Create ~/.config/google-image-gen/.env with: GOOGLE_AI_API_KEY=your_key_here")
+        print("  1. Create ~/.config/image-gen-4-claude/.env with: GOOGLE_AI_API_KEY=your_key_here")
         print("  2. Export: export GOOGLE_AI_API_KEY=your_key_here")
         print("Get your API key from: https://aistudio.google.com/apikey")
         return EXIT_BAD_INPUT

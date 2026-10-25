@@ -22,7 +22,7 @@ set -o pipefail
 readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 readonly PLUGIN_DIR="${1:-$(dirname "${SCRIPT_DIR}")}"
 readonly MAIN_SCRIPT="${PLUGIN_DIR}/main.py"
-readonly HOME_ENV="${HOME}/.config/google-image-gen/.env"
+readonly HOME_ENV="${HOME}/.config/image-gen-4-claude/.env"
 
 # ANSI color codes
 readonly RED='\033[0;31m'
@@ -87,7 +87,7 @@ env_file_has_key() {
 # Check if GOOGLE_AI_API_KEY is available from any source.
 # Checks in order:
 #   1. Environment variable
-#   2. ~/.config/google-image-gen/.env
+#   2. ~/.config/image-gen-4-claude/.env
 #   3. Plugin directory .env
 # Returns:
 #   0 if valid, 1 if not found
@@ -112,7 +112,7 @@ check_api_key() {
 
   print_error "GOOGLE_AI_API_KEY not found"
   echo "       Set it using one of these methods:"
-  echo "       1. Create ~/.config/google-image-gen/.env with: GOOGLE_AI_API_KEY=your_key"
+  echo "       1. Create ~/.config/image-gen-4-claude/.env with: GOOGLE_AI_API_KEY=your_key"
   echo "       2. export GOOGLE_AI_API_KEY=your_key"
   echo "       Get API key from: https://aistudio.google.com/apikey"
   return 1

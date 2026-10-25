@@ -27,8 +27,8 @@ Features:
 In Claude Code, run:
 
 ```
-/plugin marketplace add waqasxh/google-image-gen-plugin
-/plugin install google-image-gen@google-image-gen
+/plugin marketplace add waqasxh/image-gen-4-claude
+/plugin install image-gen-4-claude@image-gen-4-claude
 ```
 
 ### 2. Set Your API Key
@@ -36,8 +36,8 @@ In Claude Code, run:
 **Option A: Config file (recommended)**
 
 ```bash
-mkdir -p ~/.config/google-image-gen
-echo "GOOGLE_AI_API_KEY=your_actual_api_key_here" > ~/.config/google-image-gen/.env
+mkdir -p ~/.config/image-gen-4-claude
+echo "GOOGLE_AI_API_KEY=your_actual_api_key_here" > ~/.config/image-gen-4-claude/.env
 ```
 
 **Option B: Environment variable**
@@ -148,7 +148,7 @@ The plugin tries the **free tier first** and never uses the paid model on its ow
 
 | Error                         | Cause                 | Solution                                                       |
 |-------------------------------|-----------------------|----------------------------------------------------------------|
-| `GOOGLE_AI_API_KEY not found` | Missing API key       | Create `~/.config/google-image-gen/.env` with your API key     |
+| `GOOGLE_AI_API_KEY not found` | Missing API key       | Create `~/.config/image-gen-4-claude/.env` with your API key     |
 | Exit code `3` / `FREE_TIER_UNAVAILABLE` | Free quota exhausted or billing required | Wait and retry, or confirm switching to paid (`--paid`) |
 | `uv: command not found`       | uv not installed      | Install via `curl -LsSf https://astral.sh/uv/install.sh \| sh` |
 
@@ -179,14 +179,6 @@ Users receive updates via `/plugin update` or automatic update checks.
 | `main.py`, `scripts/`   | Executed via Bash by Claude                        |
 | `${CLAUDE_PLUGIN_ROOT}` | Plugin cache path (where plugin files live)        |
 | `--cwd` / working dir   | User's project path (where output files are saved) |
-
-## Credits
-
-This is a fork of [ypfaff/google-image-gen-plugin](https://github.com/ypfaff/google-image-gen-plugin) by Yannick Pfaff
-(MIT), which is based on the work
-from [AI Engineer Skool's Google Image Gen API Starter](https://github.com/AI-Engineer-Skool/google-image-gen-api-starter).
-
-For more infos, check out the corresponding [video guide](https://youtu.be/NBibgD7I48w?si=ucFFgKFgyx5FxA-0).
 
 ## License
 

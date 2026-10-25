@@ -1,5 +1,5 @@
 ---
-name: google-image-gen
+name: image-gen-4-claude
 description: >
   Generate images using Google's Gemini API. Use this skill when the user wants
   to generate, create, or edit images with AI. Keywords: image generation,
@@ -53,7 +53,7 @@ uv sync --project "${CLAUDE_PLUGIN_ROOT}"
 ```
 
 If the environment check fails, the user needs to configure their API key.
-Recommended: Create `~/.config/google-image-gen/.env` with:
+Recommended: Create `~/.config/image-gen-4-claude/.env` with:
 
 ```
 GOOGLE_AI_API_KEY=your_key_here
