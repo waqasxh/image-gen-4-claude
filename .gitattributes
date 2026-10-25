@@ -1,6 +1,2 @@
-# Handle line endings
-* text=auto
-
-# Keep Python and Shell files with LF
-*.py text eol=lf
-*.sh text eol=lf
+# Normalize all text files to LF in repo and working tree
+* text=auto eol=lf
