@@ -27,7 +27,7 @@ Usage:
     uv run python main.py output.png "Change the background to blue" --edit input.png
     uv run python main.py output.png "Same style but a sphere" --ref style.png
     uv run python main.py output.png "Prompt" --aspect 16:9
-    uv run python main.py output.png "Prompt" --paid
+    uv run python main.py output.png "Prompt" --paid --confirm-paid
     uv run python main.py --cwd /path/to/project output.png "Prompt"
 
 Aspect ratios: 1:1, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9
@@ -254,7 +254,7 @@ Examples:
   python main.py output.png "cube" "sphere"
   python main.py output.png "Make it green" --edit input.png
   python main.py output.png "Similar style" --ref style.png
-  python main.py output.png "Prompt" --paid        # only after user confirmed
+  python main.py output.png "Prompt" --paid --confirm-paid  # only after user confirmed
   python main.py --cwd /path/to/project output.png "Prompt"
 
 Exit codes: 0 ok, 1 failed, 2 invalid input, 3 free tier unavailable.
@@ -279,7 +279,12 @@ Exit codes: 0 ok, 1 failed, 2 invalid input, 3 free tier unavailable.
     parser.add_argument(
         "--paid",
         action="store_true",
-        help="Use the paid model (may incur charges). Only pass after the user confirmed.",
+        help="Use the paid model (may incur charges). Requires --confirm-paid.",
+    )
+    parser.add_argument(
+        "--confirm-paid",
+        action="store_true",
+        help="Assert that the user explicitly confirmed paid usage for this request.",
     )
     parser.add_argument(
         "--cwd",
@@ -302,6 +307,11 @@ def main() -> int:
         print("  1. Create ~/.config/image-gen-4-claude/.env with: GOOGLE_AI_API_KEY=your_key_here")
         print("  2. Export: export GOOGLE_AI_API_KEY=your_key_here")
         print("Get your API key from: https://aistudio.google.com/apikey")
+        return EXIT_BAD_INPUT
+
+    if args.paid and not args.confirm_paid:
+        print("Error: --paid requires --confirm-paid, set only after the user explicitly")
+        print("confirmed paid usage for this request. Refusing to use the paid model.")
         return EXIT_BAD_INPUT
 
     tier = "paid" if args.paid else "free"

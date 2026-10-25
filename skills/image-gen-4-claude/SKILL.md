@@ -26,7 +26,7 @@ for this request.
 3. Ask the user with AskUserQuestion, for example: "The free Gemini image tier is unavailable
    (<reason from output>). Switch to the paid model for this image?" Options: use paid once /
    wait and retry free later / cancel.
-4. Only on a clear yes, re-run the same command with `--paid` added. Approval covers that request
+4. Only on a clear yes, re-run the same command with `--paid --confirm-paid` added. The script refuses `--paid` without `--confirm-paid`. Approval covers that request
    only; ask again next time.
 
 Switching to paid without asking is only acceptable when the user already said so in their
@@ -84,7 +84,8 @@ resolves it relative to the user's project root. The file format follows the ext
 | `--ref`    | `-r`  | Reference image (repeatable, max 14 including the edited image)        |
 | `--edit`   | `-e`  | Edit existing image instead of generating (exactly one prompt)         |
 | `--aspect` | `-a`  | Aspect ratio: `1:1`, `3:4`, `4:3`, `4:5`, `5:4`, `9:16`, `16:9`, `21:9` |
-| `--paid`   |       | Use the paid model. Only after user confirmation (see above)           |
+| `--paid`   |       | Paid model. Needs `--confirm-paid`, only after user confirmation       |
+| `--confirm-paid` |  | Asserts the user confirmed paid usage for this request                 |
 
 Style templates are markdown files with a `## Prompt Template` heading followed by a fenced code
 block containing the prompt and a `{subject}` placeholder.
@@ -120,7 +121,7 @@ RUN output.png "Same style but with a car" --ref reference.png
 RUN output.png "cat" "dog" "bird"
 
 # After the user confirmed paid usage
-RUN output.png "A red apple on a wooden table" --paid
+RUN output.png "A red apple on a wooden table" --paid --confirm-paid
 ```
 
 (Write the full command each time; `RUN` is shorthand only.)

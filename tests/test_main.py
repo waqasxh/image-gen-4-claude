@@ -45,3 +45,22 @@ def test_load_style_template_missing_section(tmp_path):
 def test_is_quota_error(code, status, message, expected):
     exc = genai_errors.APIError(code, {"error": {"code": code, "status": status, "message": message}})
     assert main._is_quota_error(exc) is expected
+
+
+def test_paid_without_confirmation_is_refused(monkeypatch, capsys, tmp_path):
+    monkeypatch.setenv("GOOGLE_AI_API_KEY", "dummy")
+    monkeypatch.setattr(sys, "argv", ["main.py", str(tmp_path / "o.png"), "x", "--paid"])
+    assert main.main() == main.EXIT_BAD_INPUT
+    assert "--confirm-paid" in capsys.readouterr().out
+
+
+def test_default_run_uses_free_tier(monkeypatch, capsys, tmp_path):
+    monkeypatch.setenv("GOOGLE_AI_API_KEY", "dummy")
+    monkeypatch.delenv("GEMINI_IMAGE_MODEL_FREE", raising=False)
+    monkeypatch.setattr(sys, "argv", ["main.py", str(tmp_path / "o.png"), "x"])
+    monkeypatch.setattr(main.genai, "Client", lambda **kw: (_ for _ in ()).throw(RuntimeError("stop")))
+    try:
+        main.main()
+    except RuntimeError:
+        pass
+    assert f"Tier: free (model: {main.DEFAULT_FREE_MODEL})" in capsys.readouterr().out

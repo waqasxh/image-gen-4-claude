@@ -123,9 +123,9 @@ The plugin tries the **free tier first** and never uses the paid model on its ow
 | Paid | `gemini-3-pro-image`          | `GEMINI_IMAGE_MODEL_PAID` |
 
 - If the free tier can't serve a request (quota exhausted or billing required), the script exits with code `3`.
-- Claude then asks you whether to switch to the paid model, and re-runs with `--paid` only if you say yes.
+- Claude then asks you whether to switch to the paid model, and re-runs with `--paid --confirm-paid` only if you say yes.
   The approval applies to that request only.
-- From the command line, switch manually with `--paid`.
+- From the command line, switch manually with `--paid --confirm-paid` (`--paid` alone is refused).
 
 > Free quota for image models depends on your key and Google's current pricing (the pricing page may list no free tier
 > for them). In testing, the default free model worked on a real key. If the free attempt is rejected on yours, you'll
@@ -149,7 +149,7 @@ The plugin tries the **free tier first** and never uses the paid model on its ow
 | Error                         | Cause                 | Solution                                                       |
 |-------------------------------|-----------------------|----------------------------------------------------------------|
 | `GOOGLE_AI_API_KEY not found` | Missing API key       | Create `~/.config/image-gen-4-claude/.env` with your API key     |
-| Exit code `3` / `FREE_TIER_UNAVAILABLE` | Free quota exhausted or billing required | Wait and retry, or confirm switching to paid (`--paid`) |
+| Exit code `3` / `FREE_TIER_UNAVAILABLE` | Free quota exhausted or billing required | Wait and retry, or confirm switching to paid (`--paid --confirm-paid`) |
 | `uv: command not found`       | uv not installed      | Install via `curl -LsSf https://astral.sh/uv/install.sh \| sh` |
 
 ## Development
